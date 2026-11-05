@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My booking and payment</title><link rel="stylesheet" href="css/style.css"></head>
+<body data-page="payment">
+<nav id="nav"></nav>
+<main>
+  <h2>My booking and payment</h2>
+  <div id="noBooking" class="card hidden">You have no booking yet. <a href="booking.html">Choose a room</a></div>
+  <div id="bookingBox" class="hidden">
+    <div class="card"><h3>Booking status</h3><table id="bookTable"></table></div>
+    <div class="card" id="payBox">
+      <h3>Pay semester fee</h3>
+      <label class="opt"><input type="radio" name="method" value="MTN MoMo" checked> MTN MoMo</label>
+      <label class="opt"><input type="radio" name="method" value="Telecel Cash"> Telecel Cash</label>
+      <label class="opt"><input type="radio" name="method" value="AirtelTigo Money"> AirtelTigo Money</label>
+      <label class="opt"><input type="radio" name="method" value="Card"> Debit / credit card</label>
+      <label class="opt"><input type="radio" name="method" value="Bank Transfer"> Bank transfer</label>
+      <p class="note">Demo payment for this project: it records the payment but no real money moves.</p>
+      <button class="btn" id="payBtn">Pay now</button><button class="btn alt" id="cancelBtn">Cancel booking</button>
+    </div>
+    <div class="card"><h3>Payment history</h3><table id="payTable"></table></div>
+  </div>
+  <div id="msg" class="msg"></div>
+</main>
+<script src="js/app.js"></script></body></html>
