@@ -5,6 +5,8 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 const money = (n) => 'GH₵ ' + Number(n).toLocaleString('en-GH', { minimumFractionDigits: 2 });
 const show = (t, ok) => { const e = $('msg'); e.textContent = t; e.className = 'msg ' + (ok ? 'ok' : 'bad'); };
 const logout = () => { sessionStorage.clear(); location = 'index.html'; };
+const validNo = (s) => /^ST(10[1-9]|11\d|12\d|130)$/.test(s);
+const BAD_NO = 'Invalid student number. Use ST followed by a number from 101 to 130, for example ST101.';
 
 async function api(name, body) {
   const o = body ? { method: 'POST', body: JSON.stringify(body) } : {};
@@ -13,6 +15,7 @@ async function api(name, body) {
   try {
     const r = await fetch(API + name, o);
     const d = await r.json().catch(() => ({}));
+    if (!r.ok && !d.error) d.error = (d.errorMessage || 'Server problem') + ' (code ' + r.status + '). Check the terminal running netlify dev for details.';
     if (r.status === 401 && page !== 'login') logout();
     return { ok: r.ok, d };
   } catch { return { ok: false, d: { error: 'Network problem. Check your internet and try again.' } }; }
@@ -36,7 +39,9 @@ function initLogin() {
   $('tabLogin').onclick = () => tab(true); $('tabAct').onclick = () => tab(false);
   $('loginForm').onsubmit = async (e) => {
     e.preventDefault();
-    const { ok, d } = await api('login', { studentNo: $('l_no').value.trim().toUpperCase(), password: $('l_pw').value });
+    const no = $('l_no').value.trim().toUpperCase();
+    if (!validNo(no)) return show(BAD_NO, false);
+    const { ok, d } = await api('login', { studentNo: no, password: $('l_pw').value });
     if (!ok) return show(d.error, false);
     sessionStorage.setItem('token', d.token); sessionStorage.setItem('name', d.name); location = 'booking.html';
   };
@@ -44,6 +49,7 @@ function initLogin() {
     e.preventDefault();
     if ($('a_pw').value !== $('a_pw2').value) return show('Passwords do not match', false);
     const no = $('a_no').value.trim().toUpperCase();
+    if (!validNo(no)) return show(BAD_NO, false);
     const { ok, d } = await api('signup', { studentNo: no, email: $('a_em').value.trim(), password: $('a_pw').value, fullName: $('a_nm').value, gender: $('a_gd').value, phone: $('a_ph').value });
     if (ok) { tab(true); $('l_no').value = no; }
     show(ok ? d.message : d.error, ok);

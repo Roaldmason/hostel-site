@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Book a room</title><link rel="stylesheet" href="css/style.css"></head>
-<body data-page="booking">
-<nav id="nav"></nav>
-<main>
-  <h2>Choose your room</h2>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Book a room</title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body data-page="booking">
+    <nav id="nav"></nav>
+    <main>
+      <h2>Choose your room</h2>
   <div id="banner" class="msg"></div>
-  <div class="card"><label for="hostelFilter">Hostel</label><select id="hostelFilter"><option value="">All hostels</option></select></div>
+  <div class="card">
+    <label for="hostelFilter">Hostel</label>
+    <select id="hostelFilter">
+      <option value="">All hostels</option>
+    </select>
+  </div>
   <div id="rooms" class="grid">Loading rooms…</div>
   <div id="msg" class="msg"></div>
 </main>

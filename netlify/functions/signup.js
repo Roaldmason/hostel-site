@@ -9,7 +9,7 @@ exports.handler = async (event) => {
     const b = JSON.parse(event.body || '{}');
     const studentNo = (b.studentNo || '').trim().toUpperCase();
     const { email, password } = b;
-    if (!/^[A-Z0-9]{3,20}$/.test(studentNo)) return res(400, { error: 'Student number must be 3-20 letters or numbers' });
+    if (!/^ST(10[1-9]|11\d|12\d|130)$/.test(studentNo)) return res(400, { error: 'Invalid student number. Use ST followed by a number from 101 to 130, for example ST101.' });
     if (!email || !password || password.length < 6) return res(400, { error: 'Enter an email and a password of 6+ characters' });
 
     const { rows } = await pool.query('SELECT password_hash FROM student WHERE student_no=$1', [studentNo]);

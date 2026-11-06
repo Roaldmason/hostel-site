@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>UPSA Hostel Booking</title><link rel="stylesheet" href="css/style.css"></head>
+<title>Di Caprio Hostel</title><link rel="stylesheet" href="css/style.css">
+</head>
 <body data-page="login">
-<nav><b>UPSA Hostel Booking</b></nav>
+<nav class="text">Di Caprio Hostel</nav>
 <main class="card auth">
   <div class="tabs"><button id="tabLogin" class="on">Log in</button><button id="tabAct">Create account</button></div>
   <form id="loginForm">
-    <label for="l_no">Student number</label><input id="l_no" placeholder="e.g. ST101" required>
+    <label for="l_no">Student ID no.</label><input id="l_no" placeholder="e.g. ST101" required>
     <label for="l_pw">Password</label><input id="l_pw" type="password" required>
     <button class="btn" type="submit">Log in</button>
   </form>
   <form id="actForm" class="hidden">
-    <p class="note">Already on the hostel list? Fill the first three boxes only. New student? Fill every box.</p>
-    <label for="a_no">Student number</label><input id="a_no" required>
+    <label for="a_no">Student ID no.</label><input id="a_no" placeholder="e.g. ST101" required>
     <label for="a_em">Email</label><input id="a_em" type="email" required>
-    <label for="a_pw">Password (6+ characters)</label><input id="a_pw" type="password" minlength="6" required>
+    <label for="a_pw">Password (6 minimum)</label><input id="a_pw" type="password" minlength="6" required>
     <label for="a_pw2">Confirm password</label><input id="a_pw2" type="password" required>
-    <label for="a_nm">Full name (new students)</label><input id="a_nm">
-    <label for="a_gd">Gender (new students)</label><select id="a_gd"><option value="">Select</option><option value="F">Female</option><option value="M">Male</option></select>
-    <label for="a_ph">Phone, 10 digits (new students)</label><input id="a_ph" inputmode="numeric" maxlength="10" placeholder="0241234567">
+    <label for="a_nm">Full name </label><input id="a_nm">
+    <label for="a_gd">Gender</label><select id="a_gd"><option value="">Select</option><option value="F">Female</option><option value="M">Male</option></select>
+    <label for="a_ph">Phone number</label><input id="a_ph" inputmode="numeric" maxlength="10" placeholder="eg.0241234567">
     <button class="btn" type="submit">Create account</button>
   </form>
   <div id="msg" class="msg"></div>

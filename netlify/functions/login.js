@@ -5,7 +5,10 @@ const res = (code, obj) => ({ statusCode: code, body: JSON.stringify(obj) });
 
 exports.handler = async (event) => {
   try {
-    const { studentNo, password } = JSON.parse(event.body || '{}');
+    const body = JSON.parse(event.body || '{}');
+    const studentNo = (body.studentNo || '').trim().toUpperCase();
+    const password = body.password;
+    if (!/^ST(10[1-9]|11\d|12\d|130)$/.test(studentNo)) return res(400, { error: 'Invalid student number. Use ST followed by a number from 101 to 130, for example ST101.' });
     const { rows } = await pool.query('SELECT student_no, student_name, password_hash FROM student WHERE student_no=$1', [studentNo]);
     const u = rows[0];
     if (!u || !u.password_hash || !(await bcrypt.compare(password || '', u.password_hash)))
